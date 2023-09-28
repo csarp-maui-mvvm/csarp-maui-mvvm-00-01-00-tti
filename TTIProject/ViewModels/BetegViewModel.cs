@@ -1,12 +1,27 @@
-﻿//using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TTIProject.Models;
 
 namespace TTIProject.ViewModels
 {
-    public partial class BetegViewModel
+    public partial class BetegViewModel : ObservableObject
     {
-        // : ObservableObject
-        /* [ObservableProperty]
-         private Beteg _beteg;*/
+        [ObservableProperty]
+        private Beteg _beteg;
+
+        public BetegViewModel()
+        {        
+            Beteg= new Beteg();
+        }
+
+        public double TTI => Beteg.TTI;
+        public string BetegAdatok => Beteg?.BetegAdatok;
+
+        [RelayCommand]
+        public void DoTTICompute()
+        {
+            OnPropertyChanged(nameof(TTI));
+            OnPropertyChanged(nameof(BetegAdatok));
+        }
     }
 }
